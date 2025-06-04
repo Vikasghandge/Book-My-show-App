@@ -732,6 +732,33 @@ The path of prometheus.yml is; cd /etc/prometheus/ ----> ls -l ----> You can see
 
 
 
+-----
+example file replace jenkins ip and monitering server ip identify base on port jenkins port is 8080
+```
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers: []
+
+rule_files:
+  # - "first_rules.yml"
+
+scrape_configs:
+  - job_name: "node_exporter"
+    static_configs:
+      - targets: ["3.111.39.157:9100"]
+
+  - job_name: "jenkins"
+    metrics_path: "/prometheus"
+    static_configs:
+      - targets: ["3.111.219.164:8080"]
+
+
+```
+
+
  In the above, replace <your-jenkins-ip> and <your-jenkins-port> with the appropriate IPs ----> esc ----> :wq
 Also replace the public ip of monitorting VM. Dont change 9100. Even though the Monitoring server is running on 9090, dont change 9100 in the above script
 
